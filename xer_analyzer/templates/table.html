@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% block content %}
+    <h2>{{ desctiption }}</h2>
+    <!-- <p>{{ current }}</p> -->
+    <table>
+        <tr>
+        {% for col in table['cols'] %}
+            <th>{{ col }}</th>
+        {% endfor %}
+        </tr>
+        {% for row in table['rows'] %}
+            <tr>
+                {% for r in row %}
+                    <td>{{ r }}</td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </table>
+  
+<a href="/">Home</a>
+
+{% endblock %}
