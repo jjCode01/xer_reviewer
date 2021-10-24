@@ -1,86 +1,35 @@
 {% extends "layout.html" %}
 {% block content %}
-    <div id="Activity_Changes">
-        <h2>Activity Changes</h2>
-        <table>
-            <!-- <tr>
-                <th>Change</th>
-                <th>Count</th>
-            </tr> -->
-            <tr>
-                <td>Added Activities</td>
-                <td>{{ tasks.added['rows']|length }}</td>
-            </tr>
-            <tr>
-                <td>Deleted Activities</td>
-                <td>{{ tasks.deleted['rows']|length }}</td>
-            </tr>
-            <tr>
-                <td>Name Changes</td>
-                <td>{{ tasks.names['rows']|length }}</td>
-            </tr>
-            <tr>
-                <td>Original Duration Changes</td>
-                <td>{{ tasks.orig_durations['rows']|length }}</td>
-            </tr>
-            <tr>
-                <td>Calendar Changes</td>
-                <td>{{ tasks.calendars['rows']|length }}</td>
-            </tr>
-            <tr>
-                <td>Actual Start Changes</td>
-                <td>{{ tasks.actual_start['rows']|length }}</td>
-            </tr>
-            <tr>
-                <td>Actual Finish Changes</td>
-                <td>{{ tasks.actual_finish['rows']|length }}</td>
-            </tr>
-        </table>
-    </div>
-
-    <div id="Relationship_Changes">
-        <h2>Relationship Changes</h2>
-        <table>
-            <!-- <tr>
-                <th>Change</th>
-                <th>Count</th>
-            </tr> -->
-            <tr>
-                <td>Added Relationship</td>
-                <td>{{ rels.added['rows']|length }}</td>
-            </tr>
-            <tr>
-                <td>Deleted Relationship</td>
-                <td>{{ rels.deleted['rows']|length }}</td>
-            </tr>
-            <tr>
-                <td>Revised Relationship</td>
-                <td>{{ rels.revised['rows']|length }}</td>
-            </tr>
-        </table>
-    </div>
-
-    <div id="Resource_Changes">
-        <h2>Resource Changes</h2>
-        <table>
-            <!-- <tr>
-                <th>Change</th>
-                <th>Count</th>
-            </tr> -->
-            <tr>
-                <td>Added Resources</td>
-                <td>{{ rcrs.added['rows']|length }}</td>
-            </tr>
-            <tr>
-                <td>Deleted Resources</td>
-                <td>{{ rcrs.deleted['rows']|length }}</td>
-            </tr>
-            <tr>
-                <td>Revised Resources</td>
-                <td>{{ rcrs.revised['rows']|length }}</td>
-            </tr>
-        </table>
-    </div>
+    {% for cat in changes %}
+        <div class="category" id={{ cat }}>
+            <h2>{{ changes[cat]['desc'] }}</h2>
+            
+            {% for chg in changes[cat] %}
+                
+                {% if chg != "desc" %}
+                <div class="change">
+                    <h3>{{ changes[cat][chg]['desc'] }}: {{ changes[cat][chg]['rows']|length }}</h3>
+                    {% if changes[cat][chg]['rows'] %}
+                        <table>
+                            <tr>
+                            {% for col in changes[cat][chg]['cols'] %}
+                                <th>{{ col }}</th>
+                            {% endfor %}
+                            </tr>
+                            {% for row in changes[cat][chg]['rows'] %}
+                                <tr>
+                                    {% for col in row %}
+                                        <td>{{ col }}</td>
+                                    {% endfor %}
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    {% endif %}
+                </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    {% endfor %}
   
 <a href="/">Home</a>
 

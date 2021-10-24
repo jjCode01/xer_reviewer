@@ -47,6 +47,9 @@ class Task:
     def __str__(self) -> str:
         return f'{self["task_code"]} - {self["task_name"]}'
 
+    def __getitem__(self, name: str) -> Any:
+        return self._kwargs[name]
+
     @property
     def in_progress(self) -> bool:
         return self._kwargs['status_code'] == 'TK_Active'
