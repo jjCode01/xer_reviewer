@@ -29,12 +29,12 @@ changes = {
             'rows': []
         },
         'start': {
-            'desc': 'Taskual Start Date Changes',
+            'desc': 'Actual Start Date Changes',
             'cols': ['Task Id', 'Task Name', 'New Start', 'Old Start'],
             'rows': []
         },
         'finish': {
-            'desc': 'Taskual Finish Date Changes',
+            'desc': 'Actual Finish Date Changes',
             'cols': ['Task Id', 'Task Name', 'New Finish', 'Old Finish'],
             'rows': []
         },

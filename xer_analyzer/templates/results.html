@@ -8,8 +8,11 @@
                 
                 {% if chg != "desc" %}
                 <div class="change">
+                    <div class="description collapsible">
                     <h3>{{ changes[cat][chg]['desc'] }}: {{ changes[cat][chg]['rows']|length }}</h3>
+                    </div>
                     {% if changes[cat][chg]['rows'] %}
+                        <div class="data">
                         <table>
                             <tr>
                             {% for col in changes[cat][chg]['cols'] %}
@@ -17,13 +20,18 @@
                             {% endfor %}
                             </tr>
                             {% for row in changes[cat][chg]['rows'] %}
-                                <tr>
+                                {% if loop.index % 2 == 0 %}
+                                <tr class="even">
+                                {% else %}
+                                <tr class="odd">
+                                {% endif %}
                                     {% for col in row %}
                                         <td>{{ col }}</td>
                                     {% endfor %}
                                 </tr>
                             {% endfor %}
                         </table>
+                        </div>
                     {% endif %}
                 </div>
                 {% endif %}
@@ -32,5 +40,7 @@
     {% endfor %}
   
 <a href="/">Home</a>
+
+<script src="../static/js/script.js"></script>
 
 {% endblock %}

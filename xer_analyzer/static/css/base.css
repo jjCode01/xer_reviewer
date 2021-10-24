@@ -2,6 +2,7 @@ html, body{
     margin: 0;
     padding: 0;
     font-family: 'Roboto', sans-serif;
+    background: #34495e;
 }
 
 .header{
@@ -11,24 +12,67 @@ html, body{
 }
 
 .category{
-    background: #aaa;
-    margin: 2%;
-    padding: 1rem;
+    /* background: rgb(225, 225, 225); */
+    margin: 3%;
+    padding: 15px 5px;
+    border-radius: 8px;
+    border: solid rgb(240, 240, 240) 1px;
+    background: white;
+    box-shadow: rgba(0, 0, 0, 0.63) 0px 0px 20px;
 }
 
 .change{
     margin: 1%;
-    padding: 1rem;
-    background: azure;
+    /* padding: 1rem; */
+    /* border-radius: 8px;
+    background: white;
+    box-shadow: lightgray 0px 0px 10px; */
+}
+
+.description{
+    padding: 5px 10px;
+    background: rgb(240, 240, 240);
+    border-radius: 5px;
+    margin-bottom: 5px;
+    border: solid lightgray 1px;
+}
+
+.odd{
+    background: rgb(240, 240, 240);
+}
+
+.data{
+    padding: 0 10px;
+    max-height: 0px;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
 }
 
 h1{
-    font-size: 4rem;
+    font-size: 3rem;
     font-weight: bold;
     margin: 0;
-    text-shadow: 3px 3px 3px rgb(75, 75, 75);
 }
 
-h2, h3{
-    margin: 10px;
+h2{
+    margin: 0px 20px;
+}
+
+h3{
+    margin: 0px
+}
+
+table{
+    border-collapse: collapse;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+th, td{
+    padding: 2px 10px;
+    border-bottom: solid gray 1px;
+}
+
+th{
+    text-align: left;
 }
