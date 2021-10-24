@@ -8,9 +8,14 @@
                 
                 {% if chg != "desc" %}
                 <div class="change">
-                    <div class="description collapsible">
-                    <h3>{{ changes[cat][chg]['desc'] }}: {{ changes[cat][chg]['rows']|length }}</h3>
-                    </div>
+                    <!-- <div class="description"> -->
+                    {% if changes[cat][chg]['rows'] %}
+                    <h3 class= "description collapsible">
+                    {% else %}
+                    <h3 class= "description empty">
+                    {% endif %}
+                    {{ changes[cat][chg]['desc'] }}: {{ changes[cat][chg]['rows']|length }}</h3>
+                    <!-- </div> -->
                     {% if changes[cat][chg]['rows'] %}
                         <div class="data">
                         <table>

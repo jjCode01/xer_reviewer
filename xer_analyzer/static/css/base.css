@@ -2,17 +2,20 @@ html, body{
     margin: 0;
     padding: 0;
     font-family: 'Roboto', sans-serif;
+    color: rgb(40, 40, 40);
 }
 
 .header{
-    margin: 1% 3% 0 3%;
+    margin: 1% 3% 1% 3%;
     padding-bottom: 2px;
-    border-bottom: solid 1px gray;
+    border-bottom-style: solid;
+    border-bottom-width: 2px;
+    border-image: linear-gradient(to right, #4666FF, whitesmoke) 1;
     font-family: 'Orbitron', sans-serif;
 }
 
 .category{
-    margin: 1% 3%;
+    margin: 0% 3% 0% 3%;
     padding: 15px 5px;
 }
 
@@ -21,28 +24,36 @@ html, body{
 }
 
 .description{
-    padding: 5px 10px;
+    padding: 5px 2px 5px 0;
     margin-bottom: 0px;
-    border-bottom: solid lightgray 1px;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-image: radial-gradient(#4666FF, whitesmoke) 1;
+    font-size: 14px;
+}
+
+.collapsible{
     color: rgb(41, 40, 40);
 }
 
+.empty{
+    color: rgba(51, 50, 50, 0.76);
+}
+
 .odd{
-    background: rgba(118, 212, 255, 0.158);
+    background: #4665ff0e;
 }
 
 .data{
     background: white;
-    /* padding: 5px 10px; */
     max-height: 0px;
     overflow: hidden;
     transition: max-height 0.3s ease-out;
     border-left: solid 1px lightgray;
     border-right: solid 1px lightgray;
-    box-shadow: inset 0 0 5px rgba(211, 211, 211, 0.781), inset 0 0 5px rgba(211, 211, 211, 0.781);
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
-    /* border-bottom: solid 1px lightgray; */
+    box-shadow: inset 0 0 5px #4665ff3d;
+    border-radius: 2px;
+    margin: 0 10px;
 }
 
 h1{
@@ -52,25 +63,26 @@ h1{
 }
 
 h2{
-    margin: 0px 20px;
+    margin: 0px 27px;
+    font-size: 16px;
 }
 
 h3{
-    margin: 0px
+    margin: 0px 5px 0px 0px;
+    font-weight: normal;
+    font-size: 14px;
 }
 
 table{
     border-collapse: collapse;
     margin-bottom: 5px 10px;
     width: 100%;
-    /* border-left: solid lightgray 1px;
-    border-right: solid lightgray 1px; */
-    box-shadow: inset 0 0 15px lightgray;
 }
 
 th, td{
-    padding: 3px 10px;
+    padding: 4px 10px;
     border-bottom: solid lightgray 1px;
+    font-size: 13px;
 }
 
 th{
@@ -83,14 +95,18 @@ input{
     display: block;
 }
 
-.collapsible:before {
-    content: '\02795'; /* Unicode character for "plus" sign (+) */
-    font-size: 13px;
+.empty:before {
+    content: '\025BC';
+    font-size: 12px;
     color: white;
-    float: left;
-    margin-right: 5px;
+  }
+
+.collapsible:before {
+    content: '\025BC'; /* Unicode character for "plus" sign (+) */
+    font-size: 12px;
+    color: black;
   }
   
   .active:before {
-    content: "\2796"; /* Unicode character for "minus" sign (-) */
+    content: "\025B2"; /* Unicode character for "minus" sign (-) */
   }
