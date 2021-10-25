@@ -1,5 +1,47 @@
 {% extends "layout.html" %}
 {% block content %}
+
+    <div class="category">
+        <h2>Projects</h2>
+        <div class="change">
+            
+            <div class="data1">
+            <table>
+                <tr>
+                    <th>Version</th>
+                    <th>Project ID</th>
+                    <th>Project Name</th>
+                    <th>Data Date</th>
+                    <th>End Date</th>
+                </tr>
+                <tr>
+                    <td>[Current]</td>
+                    <td>{{ projects.current["proj_short_name"] }}</td>
+                    <td>{{ projects.current["long_name"] }}</td>
+                    <td>{{ projects.current["last_recalc_date"].strftime("%d-%b-%Y") }}</td>
+                    <td>{{ projects.current["scd_end_date"].strftime("%d-%b-%Y") }}</td>
+                </tr>
+                <tr>
+                    <td>[Previous]</td>
+                    <td>{{ projects.previous["proj_short_name"] }}</td>
+                    <td>{{ projects.previous["long_name"] }}</td>
+                    <td>{{ projects.previous["last_recalc_date"].strftime("%d-%b-%Y")  }}</td>
+                    <td>{{ projects.previous["scd_end_date"].strftime("%d-%b-%Y") }}</td>
+                </tr>
+                <tr>
+                    <td class="total"> </td>
+                    <td class="total"> </td>
+                    <td class="total">Variance</td>
+                    {% set dd_var = projects.current["last_recalc_date"] - projects.previous["last_recalc_date"] %}
+                    <td class="total">{{ dd_var.days }} days</td>
+                    {% set ed_var = projects.current["scd_end_date"] - projects.previous["scd_end_date"] %}
+                    <td class="total">{{ ed_var.days }} days</td>
+                </tr>
+            </table>
+            </div>
+        </div>
+    </div>
+
     {% for cat in changes %}
         <div class="category" id={{ cat }}>
             <h2>{{ changes[cat]['desc'] }}</h2>
@@ -18,7 +60,7 @@
                     <!-- </div> -->
                     {% if changes[cat][chg]['rows'] %}
                         <div class="data">
-                        <table>
+                        <table class="tasks">
                             <tr>
                             {% for col in changes[cat][chg]['cols'] %}
                                 <th>{{ col }}</th>

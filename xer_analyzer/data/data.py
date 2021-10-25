@@ -82,3 +82,7 @@ changes = {
     }
 }
 
+projects = {
+    'current': {},
+    'previous': {}
+}
