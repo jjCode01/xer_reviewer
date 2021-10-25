@@ -72,13 +72,13 @@ class Xer:
         self.tasks = {task['task_id']: Task(**task) for task in sorted(kwargs['TASK'], key=lambda x: x['task_code'])}
 
         self.resources = dict()
-        for res in kwargs.get('TASKRSRC', []):
+        for res in sorted(kwargs.get('TASKRSRC', []), key=lambda x: (self.get_task(x)['task_code'], x.get('rsrc_name', None))):
             task = self.get_task(res)['task_code']
             rsrc = res.get('rsrc_name', None)
             self.resources[(task, rsrc)] = res
 
         self.relationships = dict()
-        for rel in kwargs['TASKPRED']:
+        for rel in sorted(kwargs['TASKPRED'], key=lambda x: (self.get_task(x, 'pred_task_id')['task_code'], self.get_task(x)['task_code'], x['pred_type'])):
             succ = self.get_task(rel)['task_code']
             pred = self.get_task(rel, 'pred_task_id')['task_code']
             link = rel['pred_type']
