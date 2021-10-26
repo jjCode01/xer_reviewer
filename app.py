@@ -9,8 +9,10 @@ CODEC = 'cp1252'
 curr_xer = None
 prev_xer = None
 
-@app.route('/', methods=['GET, POST'])
+@app.route('/', methods=['GET', 'POST'])
 def index():
+    if request.method == "GET":
+        return render_template('index.html')
     if request.method == "POST":
         if (curr := request.files.get('current')) and (prev := request.files.get('previous')):
             curr_xer = Xer(**parse_xer_file(curr.read().decode(CODEC).splitlines()))
@@ -22,9 +24,6 @@ def index():
             projects['previous'] = list(prev_xer.projects.values())[0]
     
             return render_template('results.html', changes=changes, projects=projects)
-
-    return render_template('index.html')
-
 
 # @app.route('/results', methods=['POST'])
 # def results():
