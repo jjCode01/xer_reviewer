@@ -86,3 +86,12 @@ projects = {
     'current': {},
     'previous': {}
 }
+
+longest_path = {
+    'current': {
+
+    },
+    'previous': {
+
+    }
+}

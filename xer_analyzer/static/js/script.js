@@ -12,3 +12,18 @@ for (i = 0; i < coll.length; i++) {
         } 
     });
 }
+
+
+function clickHandle(evt, id) {
+    var i, x, tablinks;
+    x = document.getElementsByClassName("cat");
+    for (i = 0; i < x.length; i++) {
+      x[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < x.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" blue_but", "");
+    }
+    document.getElementById(id).style.display = "block";
+    evt.currentTarget.className += " blue_but";
+}
