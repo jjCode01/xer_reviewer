@@ -1,5 +1,23 @@
 # data.py
 
+updates = {
+    'started':{
+        'desc': 'Tasks Started and Not Finished',
+        'cols': ['Task Id', 'Task Name', 'Orig Dur', 'Rem Dur', 'Start', 'Finish', 'Prev Start', 'Prev Finish'],
+        'rows': []
+    },
+    'finished':{
+        'desc': 'Tasks Finished',
+        'cols': ['Task Id', 'Task Name', 'Start', 'Finish', 'Prev Start', 'Prev Finish'],
+        'rows': []
+    },
+    'in_progress':{
+        'desc': 'In Progress Updates',
+        'cols': ['Task Id', 'Task Name', 'Orig Dur', 'Rem Dur', 'Prev Rem Dur', 'Start', 'Finish', 'Prev Finish'],
+        'rows': []
+    },
+}
+
 changes = {
     'task': {
         'desc': 'Task Changes',
@@ -9,7 +27,7 @@ changes = {
             'rows': []
         },
         'deleted': {
-            'desc': 'Deteleted Tasks',
+            'desc': 'Deleted Tasks',
             'cols': ['Task Id', 'Task Name'],
             'rows': []
         },

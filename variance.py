@@ -2,7 +2,7 @@ from datetime import datetime
 from typing import Any
 
 from xer_parse import Xer, Task
-from data.data import changes
+from data.data import changes, updates
 
 
 def mk_str(val: Any) -> str:
@@ -98,6 +98,9 @@ def find_task_changes(curr_xer: Xer, prev_xer: Xer) -> None:
     changes['task']['calendar']['rows'] = []
     changes['task']['start']['rows'] = []
     changes['task']['finish']['rows'] = []
+    updates['started']['rows'] = []
+    updates['finished']['rows'] = []
+    updates['in_progress']['rows'] = []
 
     for task in curr_tasks.values():
         if not task['task_code'] in prev_tasks:
@@ -116,7 +119,9 @@ def find_task_changes(curr_xer: Xer, prev_xer: Xer) -> None:
 
         # original duration changes
         curr_dur = int(task['target_drtn_hr_cnt'] / 8)
+        curr_rem_dur = int(task['remain_drtn_hr_cnt'] / 8)
         prev_dur = int(prev['target_drtn_hr_cnt'] / 8)
+        prev_rem_dur = int(prev['remain_drtn_hr_cnt'] / 8)
         if var := curr_dur - prev_dur:
             changes['task']['duration']['rows'].append((
                 task['task_code'], task['task_name'], curr_dur, prev_dur, var
@@ -130,6 +135,7 @@ def find_task_changes(curr_xer: Xer, prev_xer: Xer) -> None:
                 prev_xer.task_calendar(prev)['clndr_name']
             ))
 
+        # actual start change
         if not task.not_started and not prev.not_started:
             if task['act_start_date'] != prev['act_start_date']:
                 changes['task']['start']['rows'].append((
@@ -137,6 +143,7 @@ def find_task_changes(curr_xer: Xer, prev_xer: Xer) -> None:
                     mk_str(task['act_start_date']), mk_str(prev['act_start_date'])
                 ))
 
+        # actual finish change
         elif task.completed and prev.completed:
             if task['act_end_date'] != prev['act_end_date']:
                 changes['task']['finish']['rows'].append((
@@ -144,3 +151,27 @@ def find_task_changes(curr_xer: Xer, prev_xer: Xer) -> None:
                     mk_str(task['act_finish_date']), mk_str(prev['act_finish_date'])
                 ))
 
+        # activity started
+        if task.in_progress and prev.not_started:
+            updates['started']['rows'].append((
+                task['task_code'], task['task_name'],
+                mk_str(curr_dur), mk_str(curr_rem_dur),
+                mk_str(task.start), mk_str(task.finish),
+                mk_str(prev.start), mk_str(prev.finish)
+            ))
+
+        # activity finished
+        if task.completed and not prev.completed:
+            updates['finished']['rows'].append((
+                task['task_code'], task['task_name'],
+                mk_str(task.start), mk_str(task.finish),
+                mk_str(prev.start), mk_str(prev.finish)
+            ))
+
+        # activity finished
+        if task.in_progress and prev.in_progress:
+            updates['in_progress']['rows'].append((
+                task['task_code'], task['task_name'],
+                mk_str(curr_dur), mk_str(curr_rem_dur), mk_str(prev_rem_dur),
+                mk_str(task.start), mk_str(task.finish), mk_str(prev.finish)
+            ))

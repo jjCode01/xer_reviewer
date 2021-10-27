@@ -34,6 +34,13 @@ class Project:
 class Task:
     def __init__(self, **kwargs) -> None:
         self._kwargs = kwargs
+        self.start = self._kwargs['early_start_date'] \
+            if self.not_started \
+            else self._kwargs['act_start_date']
+
+        self.finish = self._kwargs['act_end_date'] \
+            if self.completed \
+            else self._kwargs['early_end_date']
 
     def __getitem__(self, name: str):
         return self._kwargs[name]

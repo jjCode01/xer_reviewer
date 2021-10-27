@@ -1,21 +1,21 @@
 {% extends "layout.html" %}
 {% block content %}
 <div class="category">
-  <h2>File Upload</h2>
-  <div class="change">
-  <form action="/" method="post" enctype="multipart/form-data">
-      <div class="description">
-        <h3>Current File</h3>
-      </div>
-      <div>
-      <input type='file' name="current" accept="xer"/>
-      </div>
-      <div class="description">
-        <h3>Previous File</h3>
-      </div>
-      <input type='file' name="previous" accept="xer"/>
-      <input type="submit" value="Submit">
-  </form>
+    <h2>File Upload</h2>
+    <div class="change">
+      <form action="/" method="post" enctype="multipart/form-data">
+        <div class="description">
+          <h3>Current File</h3>
+        </div>
+        <div>
+        <input type='file' name="current" accept=".xer"/>
+        </div>
+        <div class="description">
+          <h3>Previous File</h3>
+        </div>
+        <input type='file' name="previous" accept=".xer"/>
+        <input type="submit" value="Submit">
+    </form>
   </div>
-  </div>
+</div>
 {% endblock %}
