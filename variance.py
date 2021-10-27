@@ -168,10 +168,11 @@ def find_task_changes(curr_xer: Xer, prev_xer: Xer) -> None:
                 mk_str(prev.start), mk_str(prev.finish)
             ))
 
-        # activity finished
+        # in progress updates
         if task.in_progress and prev.in_progress:
-            updates['in_progress']['rows'].append((
-                task['task_code'], task['task_name'],
-                mk_str(curr_dur), mk_str(curr_rem_dur), mk_str(prev_rem_dur),
-                mk_str(task.start), mk_str(task.finish), mk_str(prev.finish)
-            ))
+            if curr_rem_dur != prev_rem_dur:
+                updates['in_progress']['rows'].append((
+                    task['task_code'], task['task_name'],
+                    mk_str(curr_dur), mk_str(curr_rem_dur), mk_str(prev_rem_dur),
+                    mk_str(task.start), mk_str(task.finish), mk_str(prev.finish)
+                ))
