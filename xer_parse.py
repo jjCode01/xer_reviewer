@@ -79,6 +79,14 @@ class Task:
     def completed(self) -> bool:
         return self._kwargs['status_code'] == 'TK_Complete'
 
+    @property
+    def longest_path(self) -> bool:
+        return self._kwargs['driving_path_flag']
+
+    @property
+    def critical(self) -> bool:
+        return not self.completed and self._kwargs['total_float_hr_cnt'] <= 0
+
 
 class Xer:
     def __init__(self, **kwargs) -> None:

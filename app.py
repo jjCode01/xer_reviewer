@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request
 from xer_parse import Xer, parse_xer_file
 from variance import find_task_changes, find_relationship_changes, find_resource_changes
-from data.data import changes, projects, updates
+from data.data import changes, projects, updates, activities
 
 app = Flask(__name__)
 CODEC = 'cp1252'
@@ -23,7 +23,7 @@ def index():
             projects['current'] = list(curr_xer.projects.values())[0]
             projects['previous'] = list(prev_xer.projects.values())[0]
     
-            return render_template('home/results.html', changes=changes, updates=updates, projects=projects)
+            return render_template('home/results.html', changes=changes, updates=updates, projects=projects, activities=activities)
 
 
 if __name__ == '__main__':

@@ -28,8 +28,7 @@
                         <td>{{ projects.current.long_name }}</td>
                     </tr>
                 </table>
-            </div>
-            <div class="bubble project">
+                <br>
                 <h2>Previous Project</h2>
                 <table>
                     <tr>
@@ -49,28 +48,28 @@
                         <th>Date</th>
                         <th>Curr</th>
                         <th>Prev</th>
-                        <th>Var</th>
+                        <th class="align-right">Var</th>
                     </tr>
                     <tr>
                         {% set var = projects.current.plan_start_date - projects.previous.plan_start_date %}
                         <td>Start Date:</td>
                         <td>{{ projects.current.plan_start_date.strftime("%d-%b-%Y") }}</td>
                         <td>{{ projects.previous.plan_start_date.strftime("%d-%b-%Y") }}</td>
-                        <td>{{ var.days }}</td>
+                        <td class="align-right">{{ var.days }}</td>
                     </tr>
                     <tr>
                         {% set var = projects.current.last_recalc_date - projects.previous.last_recalc_date %}
                         <td>Data Date:</td>
                         <td>{{ projects.current.last_recalc_date.strftime("%d-%b-%Y") }}</td>
                         <td>{{ projects.previous.last_recalc_date.strftime("%d-%b-%Y") }}</td>
-                        <td>{{ var.days }}</td>
+                        <td class="align-right">{{ var.days }}</td>
                     </tr>
                     <tr>
                         {% set var = projects.current.scd_end_date - projects.previous.scd_end_date %}
                         <td>End Date:</td>
                         <td>{{ projects.current.scd_end_date.strftime("%d-%b-%Y") }}</td>
                         <td>{{ projects.previous.scd_end_date.strftime("%d-%b-%Y") }}</td>
-                        <td>{{ var.days }}</td>
+                        <td class="align-right">{{ var.days }}</td>
                     </tr>
                     <tr>
                         <td>Must Finish By:</td>
@@ -86,10 +85,63 @@
                         {% endif %}
                         {% if projects.current.plan_end_date and projects.previous.plan_end_date %}
                             {% set var = projects.current.plan_end_date - projects.previous.plan_end_date %}
-                            <td>{{ var.days }}</td>
+                            <td class="align-right">{{ var.days }}</td>
                         {% else %}
-                            <td>N/A</td>
+                            <td class="align-right">N/A</td>
                         {% endif %}
+                    </tr>
+                </table>
+            </div>
+            <div class="bubble">
+                <h2>Activities</h2>
+                <table>
+                    <tr>
+                        <th>Count</th>
+                        <th class="align-right">Curr</th>
+                        <th class="align-right">Prev</th>
+                        <th class="align-right">Var</th>
+                    </tr>
+                    <tr>
+                        {% set var = activities.current.count - activities.previous.count %}
+                        <td>Total:</td>
+                        <td class="align-right">{{ "{:,}".format(activities.current.count) }}</td>
+                        <td class="align-right">{{ "{:,}".format(activities.previous.count) }}</td>
+                        <td class="align-right">{{ "{:,}".format(var) }}</td>
+                    </tr>
+                    <tr>
+                        {% set var = activities.current.not_started - activities.previous.not_started %}
+                        <td>Not Started:</td>
+                        <td class="align-right">{{ "{:,}".format(activities.current.not_started) }}</td>
+                        <td class="align-right">{{ "{:,}".format(activities.previous.not_started) }}</td>
+                        <td class="align-right">{{ "{:,}".format(var) }}</td>
+                    </tr>
+                    <tr>
+                        {% set var = activities.current.in_progress - activities.previous.in_progress %}
+                        <td>In Progress:</td>
+                        <td class="align-right">{{ "{:,}".format(activities.current.in_progress) }}</td>
+                        <td class="align-right">{{ "{:,}".format(activities.previous.in_progress) }}</td>
+                        <td class="align-right">{{ "{:,}".format(var) }}</td>
+                    </tr>
+                    <tr>
+                        <td>Completed:</td>
+                        {% set var = activities.current.completed - activities.previous.completed %}
+                        <td class="align-right">{{ "{:,}".format(activities.current.completed) }}</td>
+                        <td class="align-right">{{ "{:,}".format(activities.previous.completed) }}</td>
+                        <td class="align-right">{{ "{:,}".format(var) }}</td>
+                    </tr>
+                    <tr>
+                        <td>Critical (TF <= 0):</td>
+                        {% set var = activities.current.critical - activities.previous.critical %}
+                        <td class="align-right">{{ "{:,}".format(activities.current.critical) }}</td>
+                        <td class="align-right">{{ "{:,}".format(activities.previous.critical) }}</td>
+                        <td class="align-right">{{ "{:,}".format(var) }}</td>
+                    </tr>
+                    <tr>
+                        <td>Longest Path:</td>
+                        {% set var = activities.current.longest_path - activities.previous.longest_path %}
+                        <td class="align-right">{{ "{:,}".format(activities.current.longest_path) }}</td>
+                        <td class="align-right">{{ "{:,}".format(activities.previous.longest_path) }}</td>
+                        <td class="align-right">{{ "{:,}".format(var) }}</td>
                     </tr>
                 </table>
             </div>

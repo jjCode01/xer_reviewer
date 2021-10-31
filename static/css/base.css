@@ -90,10 +90,13 @@ button {
     flex-grow: 1;
 }
 
-.projects > .project,
 .changes > * ,
 .updates > *{
     width: 100%;
+}
+
+.align-right{
+    text-align: right;
 }
 
 /* .category, .projects{

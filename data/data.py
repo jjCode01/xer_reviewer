@@ -2,7 +2,12 @@
 
 updates = {
     'started':{
-        'desc': 'Tasks Started and/or Finished',
+        'desc': 'Tasks Started',
+        'cols': ['Task Id', 'Task Name', 'Orig Dur', 'Rem Dur', 'Start', 'Finish', 'Status'],
+        'rows': []
+    },
+    'finished': {
+        'desc': 'Tasks Finished',
         'cols': ['Task Id', 'Task Name', 'Orig Dur', 'Rem Dur', 'Start', 'Finish', 'Status'],
         'rows': []
     },
@@ -98,6 +103,23 @@ changes = {
 projects = {
     'current': {},
     'previous': {}
+}
+
+activities = {
+    'current': {
+        'count': 0,
+        'not_started': 0,
+        'in_progress': 0,
+        'completed': 0,
+        'longest_path': 0,
+    },
+    'previous': {
+        'count': 0,
+        'not_started': 0,
+        'in_progress': 0,
+        'completed': 0,
+        'longest_path': 0,
+    }
 }
 
 longest_path = {

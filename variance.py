@@ -2,7 +2,7 @@ from datetime import datetime
 from typing import Any
 
 from xer_parse import Xer, Task
-from data.data import changes, updates
+from data.data import changes, updates, activities
 
 
 def mk_str(val: Any) -> str:
@@ -86,6 +86,19 @@ def find_task_changes(curr_xer: Xer, prev_xer: Xer) -> None:
     curr_tasks = {task['task_code']: task for task in curr_xer.tasks.values()}
     prev_tasks = {task['task_code']: task for task in prev_xer.tasks.values()}
 
+    activities['current']['count'] = len(curr_tasks)
+    activities['previous']['count'] = len(prev_tasks)
+    activities['current']['not_started'] = len([t for t in curr_tasks.values() if t.not_started])
+    activities['previous']['not_started'] = len([t for t in prev_tasks.values() if t.not_started])
+    activities['current']['in_progress'] = len([t for t in curr_tasks.values() if t.in_progress])
+    activities['previous']['in_progress'] = len([t for t in prev_tasks.values() if t.in_progress])
+    activities['current']['completed'] = len([t for t in curr_tasks.values() if t.completed])
+    activities['previous']['completed'] = len([t for t in prev_tasks.values() if t.completed])
+    activities['current']['critical'] = len([t for t in curr_tasks.values() if t.critical])
+    activities['previous']['critical'] = len([t for t in prev_tasks.values() if t.critical])
+    activities['current']['longest_path'] = len([t for t in curr_tasks.values() if t.longest_path])
+    activities['previous']['longest_path'] = len([t for t in prev_tasks.values() if t.longest_path])
+    
     changes['task']['deleted']['rows'] = [
         (task['task_code'], task['task_name']) 
         for id, task in prev_tasks.items()
@@ -99,7 +112,7 @@ def find_task_changes(curr_xer: Xer, prev_xer: Xer) -> None:
     changes['task']['start']['rows'] = []
     changes['task']['finish']['rows'] = []
     updates['started']['rows'] = []
-    # updates['finished']['rows'] = []
+    updates['finished']['rows'] = []
     updates['in_progress']['rows'] = []
 
     for task in curr_tasks.values():
@@ -152,20 +165,20 @@ def find_task_changes(curr_xer: Xer, prev_xer: Xer) -> None:
                 ))
 
         # activity started
-        if (task.in_progress and prev.not_started) or (task.completed and not prev.completed):
+        if not task.not_started and prev.not_started:
             updates['started']['rows'].append((
                 task['task_code'], task['task_name'],
                 mk_str(curr_dur), mk_str(curr_rem_dur),
                 mk_str(task.start), mk_str(task.finish), task.status
             ))
 
-        # # activity finished
-        # if task.completed and not prev.completed:
-        #     updates['finished']['rows'].append((
-        #         task['task_code'], task['task_name'],
-        #         mk_str(task.start), mk_str(prev.start),
-        #         mk_str(task.finish), mk_str(prev.finish)
-        #     ))
+        # activity finished
+        if task.completed and not prev.completed:
+            updates['finished']['rows'].append((
+                task['task_code'], task['task_name'],
+                mk_str(curr_dur), mk_str(curr_rem_dur),
+                mk_str(task.start), mk_str(task.finish), task.status
+            ))
 
         # in progress updates
         if task.in_progress and prev.in_progress:
