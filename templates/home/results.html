@@ -1,0 +1,179 @@
+{% extends "shared/layout.html" %}
+{% block content %}
+<div class="content">
+    
+    <div class="menu" id="menu">
+        <nav class="tab">
+            <span class="title">XER Compare</span>
+            <button class="tablinks blue_but" onclick="clickHandle(event, 'projects')">Projects</button>
+            <button class="tablinks" onclick="clickHandle(event, 'changes')">Changes</button>
+            <button class="tablinks" onclick="clickHandle(event, 'updates')">Updates</button>
+            <button class="tablinks" onclick="clickHandle(event, 'critical')">Critical Path</button>
+            <button class="tablinks" onclick="clickHandle(event, 'cost')">Cost Loading</button>
+        </nav>
+    </div>
+
+
+    <div class="displayInfo">
+        <div class="projects cat" id="projects">
+            <div class="bubble project">
+                <h2>Current Project</h2>
+                <table>
+                    <tr>
+                        <td>ID:</td>
+                        <td>{{ projects.current.proj_short_name }}</td>
+                    </tr>
+                    <tr>
+                        <td>Name:</td>
+                        <td>{{ projects.current.long_name }}</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="bubble project">
+                <h2>Previous Project</h2>
+                <table>
+                    <tr>
+                        <td>ID:</td>
+                        <td>{{ projects.previous.proj_short_name }}</td>
+                    </tr>
+                    <tr>
+                        <td>Name:</td>
+                        <td>{{ projects.previous.long_name }}</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="bubble">
+                <h2>Dates (Calendar Days)</h2>
+                <table>
+                    <tr>
+                        <th>Date</th>
+                        <th>Curr</th>
+                        <th>Prev</th>
+                        <th>Var</th>
+                    </tr>
+                    <tr>
+                        {% set var = projects.current.plan_start_date - projects.previous.plan_start_date %}
+                        <td>Start Date:</td>
+                        <td>{{ projects.current.plan_start_date.strftime("%d-%b-%Y") }}</td>
+                        <td>{{ projects.previous.plan_start_date.strftime("%d-%b-%Y") }}</td>
+                        <td>{{ var.days }}</td>
+                    </tr>
+                    <tr>
+                        {% set var = projects.current.last_recalc_date - projects.previous.last_recalc_date %}
+                        <td>Data Date:</td>
+                        <td>{{ projects.current.last_recalc_date.strftime("%d-%b-%Y") }}</td>
+                        <td>{{ projects.previous.last_recalc_date.strftime("%d-%b-%Y") }}</td>
+                        <td>{{ var.days }}</td>
+                    </tr>
+                    <tr>
+                        {% set var = projects.current.scd_end_date - projects.previous.scd_end_date %}
+                        <td>End Date:</td>
+                        <td>{{ projects.current.scd_end_date.strftime("%d-%b-%Y") }}</td>
+                        <td>{{ projects.previous.scd_end_date.strftime("%d-%b-%Y") }}</td>
+                        <td>{{ var.days }}</td>
+                    </tr>
+                    <tr>
+                        <td>Must Finish By:</td>
+                        {% if projects.current.plan_end_date %}
+                            <td>{{ projects.current.plan_end_date.strftime("%d-%b-%Y") }}</td>
+                        {% else %}
+                            <td>None</td>
+                        {% endif %}
+                        {% if projects.previous.plan_end_date %}
+                            <td>{{ projects.previous.plan_end_date.strftime("%d-%b-%Y") }}</td>
+                        {% else %}
+                            <td>None</td>
+                        {% endif %}
+                        {% if projects.current.plan_end_date and projects.previous.plan_end_date %}
+                            {% set var = projects.current.plan_end_date - projects.previous.plan_end_date %}
+                            <td>{{ var.days }}</td>
+                        {% else %}
+                            <td>N/A</td>
+                        {% endif %}
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="changes cat" id="changes">
+            {% for cat in changes %}
+                {% for chg in changes[cat] %}
+                    {% if chg != "desc" %}
+                    <div class="bubble change">
+                        {% if changes[cat][chg].rows %}
+                        <h3 class="description collapsible">
+                        {% else %}
+                        <h3 class="description empty">
+                        {% endif %}
+                        {{ changes[cat][chg]['desc'] }}: {{ changes[cat][chg].rows|length }}</h3>
+                        {% if changes[cat][chg]['rows'] %}
+                            <div class="data">
+                            <table class="tasks">
+                                <tr>
+                                {% for col in changes[cat][chg].cols %}
+                                    <th>{{ col }}</th>
+                                {% endfor %}
+                                </tr>
+                                {% for row in changes[cat][chg].rows %}
+                                    {% if loop.index % 2 == 0 %}
+                                    <tr class="even">
+                                    {% else %}
+                                    <tr class="odd">
+                                    {% endif %}
+                                        {% for col in row %}
+                                            <td>{{ col }}</td>
+                                        {% endfor %}
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                            </div>
+                        {% endif %}
+                    </div>
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+        </div>
+
+        <div class="updates cat" id="updates">
+            {% for upd in updates %}
+                <div class="bubble change">
+                    {% if updates[upd]['rows'] %}
+                    <h3 class= "description collapsible">
+                    {% else %}
+                    <h3 class= "description empty">
+                    {% endif %}
+                    {{ updates[upd]['desc'] }}: {{ updates[upd]['rows']|length }}</h3>
+                    {% if updates[upd]['rows'] %}
+                        <div class="data">
+                        <table class="tasks">
+                            <tr>
+                            {% for col in updates[upd]['cols'] %}
+                                <th>{{ col }}</th>
+                            {% endfor %}
+                            </tr>
+                            {% for row in updates[upd]['rows'] %}
+                                {% if loop.index % 2 == 0 %}
+                                <tr class="even">
+                                {% else %}
+                                <tr class="odd">
+                                {% endif %}
+                                    {% for col in row %}
+                                        <td>{{ col }}</td>
+                                    {% endfor %}
+                                </tr>
+                            {% endfor %}
+                        </table>
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+            
+        </div>
+    </div>
+</div>
+  
+<!-- <a href="/">Home</a> -->
+
+<script src="../static/js/script.js"></script>
+
+{% endblock %}

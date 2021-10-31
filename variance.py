@@ -99,7 +99,7 @@ def find_task_changes(curr_xer: Xer, prev_xer: Xer) -> None:
     changes['task']['start']['rows'] = []
     changes['task']['finish']['rows'] = []
     updates['started']['rows'] = []
-    updates['finished']['rows'] = []
+    # updates['finished']['rows'] = []
     updates['in_progress']['rows'] = []
 
     for task in curr_tasks.values():
@@ -152,21 +152,20 @@ def find_task_changes(curr_xer: Xer, prev_xer: Xer) -> None:
                 ))
 
         # activity started
-        if task.in_progress and prev.not_started:
+        if (task.in_progress and prev.not_started) or (task.completed and not prev.completed):
             updates['started']['rows'].append((
                 task['task_code'], task['task_name'],
                 mk_str(curr_dur), mk_str(curr_rem_dur),
-                mk_str(task.start), mk_str(task.finish),
-                mk_str(prev.start), mk_str(prev.finish)
+                mk_str(task.start), mk_str(task.finish), task.status
             ))
 
-        # activity finished
-        if task.completed and not prev.completed:
-            updates['finished']['rows'].append((
-                task['task_code'], task['task_name'],
-                mk_str(task.start), mk_str(task.finish),
-                mk_str(prev.start), mk_str(prev.finish)
-            ))
+        # # activity finished
+        # if task.completed and not prev.completed:
+        #     updates['finished']['rows'].append((
+        #         task['task_code'], task['task_name'],
+        #         mk_str(task.start), mk_str(prev.start),
+        #         mk_str(task.finish), mk_str(prev.finish)
+        #     ))
 
         # in progress updates
         if task.in_progress and prev.in_progress:

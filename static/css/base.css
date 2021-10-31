@@ -1,18 +1,23 @@
+:root {
+    --clr-neon: #4666FF;
+    --clr-bk: #001f3f;
+    --light-txt: #ffffff;
+}
+
 html, body{
     margin: 0;
     padding: 0;
-    font-family: 'Roboto', sans-serif;
-    color: rgb(50, 50, 50);
+    font-family: 'Rubik', sans-serif;
 }
 
 .content{
     display: flex;
     flex-wrap: wrap;
-    height: 90vh;
+    height: 97.5vh;
 }
 
 .content > .menu {
-    flex: 0 0 125px;
+    flex: 0 0 150px;
     height: 100%;
 }
 
@@ -22,52 +27,32 @@ html, body{
     height: 100%;
 }
 
-.header{
-    margin: 5px 0 0;
-    padding: 3px 1%;
-    border-bottom-style: solid;
-    border-bottom-width: 2px;
-    border-image: linear-gradient(to right, #4666FF, whitesmoke) 1;
-    font-family: 'Orbitron', sans-serif;
-    text-shadow: 0px 0px 3px #4666FF;
-    color: rgb(50, 50, 50);
-}
-
-#projects{
-    display: block;
-}
-
 #changes, #updates{
     display: none;
 }
 
 .tab {
-    border: 1px solid #ccc;
-    background-color: #f1f1f1;
+    text-align: center;
+    background-color: var(--clr-bk);
+    color: var(--light-txt);
     height: 100%;
+    padding: 1em 0.3em 0;
+    box-shadow: inset -1em 0 1em -1em black;
 }
-
-/* .blue_but {
-    background-color: #4666FF;
-    color: whitesmoke;
-} */
   
 button {
     display: block;
+    margin: 1em auto 1em;
+    color: var(--light-txt);
     background-color: inherit;
-    color: black;
-    padding: 22px 16px;
-    width: 100%;
+    padding: 1.2em 16px;
+    width: 90%;
     border: none;
     outline: none;
     text-align: left;
     cursor: pointer;
     transition: 0.3s;
-}
-
-.blue_but {
-    background-color: #4666FF;
-    color: whitesmoke;
+    border-radius: 0.25em;
 }
 
   .tab button:hover {
@@ -80,14 +65,45 @@ button {
     background-color: #ccc;
   }
 
-.category, .projects{
-    margin: 10px;
-    padding: 10px 5px;
+.title{
+    padding-bottom: 2em;
 }
 
-.change{
-    margin: 1%;
+.bubble{
+    /* margin: 1em; */
+    padding: 0.5em 1em 1em;
+    border-radius: 0.25em;
+    box-shadow: 0 0 1em 0.25em lightgray;
 }
+
+.projects, .changes, .updates{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    align-content: stretch;
+    padding: 1.2em;
+    gap: 1.2em;
+    /* justify-content: space-evenly; */
+}
+
+.projects > *{
+    flex-grow: 1;
+}
+
+.projects > .project,
+.changes > * ,
+.updates > *{
+    width: 100%;
+}
+
+/* .category, .projects{
+    margin: 10px;
+    padding: 10px 5px;
+} */
+
+/* .change{
+    margin: 1%;
+} */
 
 .description{
     padding: 5px 2px 5px 0;
@@ -111,7 +127,6 @@ button {
 }
 
 .data{
-    /* background: white; */
     max-height: 0px;
     overflow: hidden;
     transition: max-height 0.3s ease-out;
@@ -119,7 +134,7 @@ button {
     border-right: solid 1px lightgray;
     box-shadow: inset 0 0 5px #4665ff3d;
     border-radius: 2px;
-    margin: 0 10px;
+    margin: 0;
 }
 
 .data1{
@@ -127,18 +142,28 @@ button {
     border-right: solid 1px lightgray;
     box-shadow: inset 0 0 5px #4665ff3d;
     border-radius: 2px;
-    margin: 0 10px;
+    margin: 0 5px;
 }
 
 h1{
     font-size: 2rem;
     margin: 0;
     font-family: 'Orbitron', sans-serif;
+    color: whitesmoke;
+    background: #001f3f;
+    text-align: center;
+    width: 100%;
+    padding: 1em 0 0 0;
+    height: 2.2em;
+    text-shadow: 0 0 1em gray;
+    box-shadow: 0 0 1em gray;
 }
 
 h2{
-    margin: 0px 27px;
+    margin: 0.25em 0.25em 0;
+    padding: 0 0.25em 0.45em;
     font-size: 16px;
+    /* text-align: center; */
 }
 
 h3{
@@ -150,12 +175,12 @@ h3{
 table{
     border-collapse: collapse;
     /* margin-bottom: 5px; */
-    width: 100%;
+    /* width: 100%; */
 }
 
 th, td{
     padding: 4px 10px;
-    border-bottom: solid lightgray 1px;
+    /* border-bottom: solid lightgray 1px; */
     font-size: 13px;
 }
 
@@ -169,29 +194,25 @@ th{
     border-top: double gray 1px;
 }
 
-input{
-    margin: 1%;
-    display: block;
-}
-
-.empty:before {
-    content: '\025BC';
+/* .empty::before {
+    content: "  ";
     font-size: 12px;
     color: white;
-  }
+  } */
 
-.collapsible:before {
+.collapsible::before {
     content: '\025BC'; /* Unicode character for "plus" sign (+) */
     font-size: 13px;
     color: #4666FF;
     text-shadow: 0px 0px 1px black;
   }
   
-  .active:before {
+.active::before {
     content: "\025B2"; /* Unicode character for "minus" sign (-) */
-  }
+}
 
-  .blue_but {
-      background: #4666FF;
-      color: whitesmoke;
+.blue_but {
+      background: var(--clr-neon);
+      color: var(--light-txt);
+      box-shadow: 0 0 1em black;
   }

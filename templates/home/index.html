@@ -1,0 +1,28 @@
+{% extends "shared/layout.html" %}
+{% block additional_style %}
+<link rel="stylesheet" type="text/css" href="../static/css/index.css">
+{% endblock %}
+{% block content %}
+<!-- <div class="header" id="title"><h1>XER Compare</h1></div> -->
+<h1>XER Compare</h1>
+<div class="container">
+	
+  <form action="/" method="post" enctype="multipart/form-data">
+
+    <div class="upload-wrap">
+      <label for="current">Current XER</label>
+      <input id="current" type='file' name="current" accept=".xer" required/>
+    </div>
+
+    <div class="upload-wrap">
+      <label class="upload-wrap" for="previous">Previous XER</label>
+      <input id="previous" type='file' name="previous" accept=".xer" required/>
+    </div>
+
+    <div class="input">
+    	<input type="submit" value="Submit">
+    </div>
+
+  </form>
+</div>
+{% endblock %}

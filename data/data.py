@@ -2,13 +2,8 @@
 
 updates = {
     'started':{
-        'desc': 'Tasks Started and Not Finished',
-        'cols': ['Task Id', 'Task Name', 'Orig Dur', 'Rem Dur', 'Start', 'Finish', 'Prev Start', 'Prev Finish'],
-        'rows': []
-    },
-    'finished':{
-        'desc': 'Tasks Finished',
-        'cols': ['Task Id', 'Task Name', 'Start', 'Finish', 'Prev Start', 'Prev Finish'],
+        'desc': 'Tasks Started and/or Finished',
+        'cols': ['Task Id', 'Task Name', 'Orig Dur', 'Rem Dur', 'Start', 'Finish', 'Status'],
         'rows': []
     },
     'in_progress':{
@@ -20,7 +15,7 @@ updates = {
 
 changes = {
     'task': {
-        'desc': 'Task Changes',
+        # 'desc': 'Task Changes',
         'added': {
             'desc': 'Added Tasks',
             'cols': ['Task Id', 'Task Name'],
@@ -58,7 +53,7 @@ changes = {
         },
     },
     'relationship': {
-        'desc': 'Relationship Changes',
+        # 'desc': 'Relationship Changes',
         'added': {
             'desc': 'Added Relationships',
             'cols': ['Pred Id', 'Pred Name', 'Succ Id', 'Succ Name', 'Link', 'Lag'],
@@ -76,7 +71,7 @@ changes = {
         },
     },
     'resource': {
-        'desc': 'Resource Changes',
+        # 'desc': 'Resource Changes',
         'added': {
             'desc': 'Added Resource Assignments',
             'cols': ['Task Id', 'Task Name', 'Resource', 'Budget Units', 'Budget Cost'],

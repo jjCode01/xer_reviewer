@@ -12,7 +12,7 @@ prev_xer = None
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == "GET":
-        return render_template('index.html')
+        return render_template('home/index.html')
     if request.method == "POST":
         if (curr := request.files.get('current')) and (prev := request.files.get('previous')):
             curr_xer = Xer(**parse_xer_file(curr.read().decode(CODEC).splitlines()))
@@ -23,7 +23,7 @@ def index():
             projects['current'] = list(curr_xer.projects.values())[0]
             projects['previous'] = list(prev_xer.projects.values())[0]
     
-            return render_template('results.html', changes=changes, updates=updates, projects=projects)
+            return render_template('home/results.html', changes=changes, updates=updates, projects=projects)
 
 
 if __name__ == '__main__':

@@ -24,6 +24,6 @@ function clickHandle(evt, id) {
     for (i = 0; i < x.length; i++) {
       tablinks[i].className = tablinks[i].className.replace(" blue_but", "");
     }
-    document.getElementById(id).style.display = "block";
+    document.getElementById(id).style.display = "flex";
     evt.currentTarget.className += " blue_but";
 }

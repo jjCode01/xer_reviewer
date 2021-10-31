@@ -32,6 +32,12 @@ class Project:
 
 
 class Task:
+    STATUS = {
+        'TK_NotStart': 'Not Started',
+        'TK_Active': 'In Progress',
+        'TK_Complete': 'Complete'
+    }
+
     def __init__(self, **kwargs) -> None:
         self._kwargs = kwargs
         self.start = self._kwargs['early_start_date'] \
@@ -56,6 +62,10 @@ class Task:
 
     def __getitem__(self, name: str) -> Any:
         return self._kwargs[name]
+
+    @property
+    def status(self) -> str:
+        return self.STATUS[self._kwargs['status_code']]
 
     @property
     def in_progress(self) -> bool:
