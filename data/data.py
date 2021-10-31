@@ -122,6 +122,21 @@ activities = {
     }
 }
 
+cost_loading = {
+    'current': {
+        'budget': 0.0,
+        'actual': 0.0,
+        'this_period': 0.0,
+        'remaining': 0.0,
+    },
+    'previous': {
+        'budget': 0.0,
+        'actual': 0.0,
+        'this_period': 0.0,
+        'remaining': 0.0,
+    },
+}
+
 longest_path = {
     'current': {
 

@@ -126,7 +126,7 @@ DATA_TABLES = {
     'RSRC': ('rsrc_id', 'clndr_id', 'rsrc_name', 'rsrc_short_name', 'rsrc_title_name', 'rsrc_type'),
     'TASK': ('task_id', 'proj_id', 'wbs_id', 'clndr_id', 'phys_complete_pct', 'task_type', 'status_code', 'task_code', 'task_name', 'rsrc_id', 'total_float_hr_cnt', 'remain_drtn_hr_cnt', 'target_drtn_hr_cnt', 'cstr_date', 'act_start_date', 'act_end_date', 'late_start_date', 'late_end_date', 'early_start_date', 'early_end_date', 'restart_date', 'reend_date', 'target_start_date', 'target_end_date', 'rem_late_start_date', 'rem_late_end_date', 'cstr_type', 'suspend_date', 'resume_date', 'float_path', 'cstr_date2', 'cstr_type2', 'driving_path_flag'),
     'TASKPRED': ('task_pred_id', 'task_id', 'pred_task_id', 'proj_id', 'pred_proj_id', 'pred_type', 'lag_hr_cnt'),
-    'TASKRSRC': ('taskrsrc_id', 'task_id', 'proj_id', 'rsrc_id', 'remain_qty', 'target_qty', 'act_ot_qty', 'act_reg_qty', 'target_cost', 'act_reg_cost', 'act_ot_cost', 'remain_cost', 'act_start_date', 'act_end_date', 'restart_date', 'reend_date', 'target_start_date', 'target_end_date', 'rem_late_start_date', 'rem_late_end_date')
+    'TASKRSRC': ('taskrsrc_id', 'task_id', 'proj_id', 'rsrc_id', 'remain_qty', 'target_qty', 'act_ot_qty', 'act_reg_qty', 'target_cost', 'act_reg_cost', 'act_ot_cost', 'remain_cost', 'act_start_date', 'act_end_date', 'restart_date', 'reend_date', 'target_start_date', 'target_end_date', 'rem_late_start_date', 'rem_late_end_date', 'act_this_per_cost')
 }
 
 def parse_xer_file(xer_file: str) -> dict:

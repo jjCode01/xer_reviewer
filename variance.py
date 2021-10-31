@@ -2,7 +2,7 @@ from datetime import datetime
 from typing import Any
 
 from xer_parse import Xer, Task
-from data.data import changes, updates, activities
+from data.data import changes, updates, activities, cost_loading
 
 
 def mk_str(val: Any) -> str:
@@ -50,6 +50,15 @@ def find_relationship_changes(curr_xer: Xer, prev_xer: Xer) -> None:
 
 
 def find_resource_changes(curr_xer: Xer, prev_xer: Xer) -> None:
+    cost_loading['current']['budget'] = sum([r['target_cost'] for r in curr_xer.resources.values()])
+    cost_loading['previous']['budget'] = sum([r['target_cost'] for r in prev_xer.resources.values()])
+    cost_loading['current']['actual'] = sum([r['act_reg_cost'] + r['act_ot_cost'] for r in curr_xer.resources.values()])
+    cost_loading['previous']['actual'] = sum([r['act_reg_cost'] + r['act_ot_cost'] for r in prev_xer.resources.values()])
+    cost_loading['current']['this_period'] = sum([r['act_this_per_cost'] for r in curr_xer.resources.values()])
+    cost_loading['previous']['this_period'] = sum([r['act_this_per_cost'] for r in prev_xer.resources.values()])
+    cost_loading['current']['remaining'] = sum([r['remain_cost'] for r in curr_xer.resources.values()])
+    cost_loading['previous']['remaining'] = sum([r['remain_cost'] for r in prev_xer.resources.values()])
+
     changes['resource']['deleted']['rows'] = [(
         key[0], prev_xer.get_task(res)['task_name'],
         key[1], mk_str(res['target_qty']), mk_str(res['target_cost']))

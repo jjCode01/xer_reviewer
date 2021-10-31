@@ -13,7 +13,7 @@ html, body{
 .content{
     display: flex;
     flex-wrap: wrap;
-    height: 97.5vh;
+    height: calc(100vh - 17px);
 }
 
 .content > .menu {
@@ -55,40 +55,38 @@ button {
     border-radius: 0.25em;
 }
 
-  .tab button:hover {
+.tab button:hover {
     background-color: #4666FF;
     color: whitesmoke;
-  }
+}
   
   /* Create an active/current "tab button" class */
-  .tab button.active {
+.tab button.active {
     background-color: #ccc;
-  }
+}
 
 .title{
     padding-bottom: 2em;
 }
 
 .bubble{
-    /* margin: 1em; */
-    padding: 0.5em 1em 1em;
-    border-radius: 0.25em;
+    padding: 1em;
+    border-radius: 0.45em;
     box-shadow: 0 0 1em 0.25em lightgray;
 }
 
 .projects, .changes, .updates{
     display: flex;
     flex-wrap: wrap;
-    align-items: stretch;
-    align-content: stretch;
-    padding: 1.2em;
-    gap: 1.2em;
-    /* justify-content: space-evenly; */
+    /* align-items: center; */
+    /* align-content: center; */
+    padding: 2em;
+    gap: 2em;
 }
 
-.projects > *{
+/* .projects > *{
     flex-grow: 1;
-}
+} */
 
 .changes > * ,
 .updates > *{
@@ -98,15 +96,6 @@ button {
 .align-right{
     text-align: right;
 }
-
-/* .category, .projects{
-    margin: 10px;
-    padding: 10px 5px;
-} */
-
-/* .change{
-    margin: 1%;
-} */
 
 .description{
     padding: 5px 2px 5px 0;
@@ -123,6 +112,7 @@ button {
 
 .empty{
     color: rgba(51, 50, 50, 0.76);
+    padding: 0.5em 1em 1em;
 }
 
 .odd{
@@ -177,12 +167,13 @@ h3{
 
 table{
     border-collapse: collapse;
+    gap: 1em;
     /* margin-bottom: 5px; */
     /* width: 100%; */
 }
 
 th, td{
-    padding: 4px 10px;
+    padding: 4px 15px;
     /* border-bottom: solid lightgray 1px; */
     font-size: 13px;
 }
